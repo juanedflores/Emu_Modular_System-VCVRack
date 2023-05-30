@@ -187,16 +187,16 @@ struct EMU_VCOWidget : ModuleWidget {
 		// racktarget::Title *title = new racktarget::Title(box.size.x / 2, top_margin, box.size.x, "rnbo");
 		// addChild(title);
 
-		if (module) {
+		// if (module) {
 			// Make these publically accessible to the widget
-			numParams = module->numParams;
-			numInputs = module->numInputs;
-			numOutputs = module->numOutputs;
+			// numParams = module->numParams;
+			// numInputs = module->numInputs;
+			// numOutputs = module->numOutputs;
 
-			addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH - 14, 0)));
-			addChild(createWidget<ScrewSilver>(Vec(box.size.x - 17, 0)));
-			addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH - 14, 365)));
-			addChild(createWidget<ScrewSilver>(Vec(box.size.x - 17, 365)));
+			addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH - 15, 0)));
+			addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 0)));
+			addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH - 15, 365)));
+			addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
 			// parameters
 			addParam(createParamCentered<EmuKnob>(POS::SINE_MIX_PARAM, module, 0));
@@ -210,10 +210,18 @@ struct EMU_VCOWidget : ModuleWidget {
 			addParam(createParamCentered<EmuKnob>(POS::LIN_ATT_PARAM, module, 6));
 			addParam(createParamCentered<EmuKnob>(POS::PWIDTH_ATT_PARAM, module, 9));
 
+			// switches
+			addParam(createParamCentered<EmuSwitch>(POS::KYBD_PARAM, module, 9));
+			addParam(createParamCentered<EmuSwitch>(POS::SYNC_PARAM, module, 10));
+			addParam(createParamCentered<EmuSwitch>(POS::HILOW_PARAM, module, 11));
+
 			// inputs
 			addInput(createInputCentered<PJ301MPort>(POS::EXP_INPUT, module, 0));
 			addInput(createInputCentered<PJ301MPort>(POS::LIN_INPUT, module, 1));
 			addInput(createInputCentered<PJ301MPort>(POS::PWIDTH_IN_INPUT, module, 2));
+			addInput(createInputCentered<PJ301MPort>(POS::OCT_INPUT, module, 3));
+			addInput(createInputCentered<PJ301MPort>(POS::GATE_INPUT, module, 4));
+			addInput(createInputCentered<PJ301MPort>(POS::SYNCIN_INPUT, module, 5));
 
 			// outputs
 			addOutput(createOutputCentered<PJ301MPort>(POS::SINE_OUTPUT, module, 0));
@@ -250,35 +258,35 @@ struct EMU_VCOWidget : ModuleWidget {
 			// Draw on the next step
 			// dirty = true;
 			// step();
-		}
+		// }
 	}
 
 
 	// Runs with every UI frame update
-	void step() override {
-
-		// The widget will be dirtied after the module is registered in the constructor
-		if (dirty) {
-			// setPanel(createPanel(asset::plugin(pluginInstance, "res/EMU_VCO.svg")));
-
-			// Screws
-
-			// PORTS, PARAMS, LABELS
-			// for (int i = 0; i < numInputs; i++) {
-			// }
-			
-			for (int i = 0; i < numParams; i++) {
-			}
-			
-			for (int i = 0; i < numOutputs; i++) {
-				// addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(109.319, 20.244)), module, i));
-			}
-
-			dirty = false;
-		}
-
-		ModuleWidget::step();
-	}
+	// void step() override {
+	//
+	// 	// The widget will be dirtied after the module is registered in the constructor
+	// 	if (dirty) {
+	// 		// setPanel(createPanel(asset::plugin(pluginInstance, "res/EMU_VCO.svg")));
+	//
+	// 		// Screws
+	//
+	// 		// PORTS, PARAMS, LABELS
+	// 		// for (int i = 0; i < numInputs; i++) {
+	// 		// }
+	// 		
+	// 		for (int i = 0; i < numParams; i++) {
+	// 		}
+	// 		
+	// 		for (int i = 0; i < numOutputs; i++) {
+	// 			// addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(109.319, 20.244)), module, i));
+	// 		}
+	//
+	// 		dirty = false;
+	// 	}
+	//
+	// 	ModuleWidget::step();
+	// }
 };
 
 

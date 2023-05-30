@@ -1,15 +1,15 @@
 {
-  "slug": "rnbo-examples",
-  "name": "RNBO Examples",
+  "slug": "Emu-modular",
+  "name": "Emu Modular Synth",
   "version": "2.0.0",
   "license": "GPL-3.0-or-later",
-  "brand": "C74",
-  "author": "Cycling '74",
-  "authorEmail": "isabel@cycling74.com",
+  "brand": "",
+  "author": "juanedflores",
+  "authorEmail": "juanedflores@gmail.com",
   "authorUrl": "",
   "pluginUrl": "",
   "manualUrl": "",
-  "sourceUrl": "https://github.com/Cycling74/RNBO-VCVRack-Example",
+  "sourceUrl": "",
   "donateUrl": "",
   "changelogUrl": "",
   "modules": [
@@ -18,7 +18,7 @@
       "name": "Emu Voltage Controlled Oscillator",
       "description": "VCO for the Emu Modular System",
       "tags": [
-        "effect"
+        "oscillator"
       ]
     }
   ]
