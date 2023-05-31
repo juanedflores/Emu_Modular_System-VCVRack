@@ -134,44 +134,44 @@ struct EMU_VCO : Module {
 /// Main module UI
 
 struct EMU_VCOWidget : ModuleWidget {
-	int numParams;
-	int numInputs;
-	int numOutputs;
-
-	std::vector<std::string> inputLabels;
-	std::vector<std::string> outputLabels;
-	std::vector<std::string> paramLabels;
-
-	// Each column of ports has a certain number of "cells" that contain a port and label. 
-	int ports_per_col = 6;
-
-	// Each column of params has a certain number of "cells" that contain a port, a label, and a knob.
-	int params_per_col = 4;
-	
-	// Box off the actual section of "cells" with a margin
-	int l_margin = RACK_GRID_WIDTH;
-	int r_margin = RACK_GRID_WIDTH;
-	int bot_margin = 2 * RACK_GRID_WIDTH;
-	// The title and top margin together make up the top band of margin
-	int top_margin = RACK_GRID_WIDTH;
-	int h_title = 3 * RACK_GRID_WIDTH;
-	// The height of the actual part that will contain ports and knobs
-	int active_box_height = RACK_GRID_HEIGHT - bot_margin - h_title - top_margin;
-
-	// A column will take up 3HP
-	int w_col = 3 * RACK_GRID_WIDTH;
-
-	// Offset from the top of a cell to the knobs, ports, and labels
-	float port_center_offset = active_box_height / ports_per_col * 0.25f;
-	float label_port_offset = active_box_height / ports_per_col * 0.55f;
-	float param_knob_center_offset = active_box_height / params_per_col * 0.25f;
-	float param_port_center_offset = active_box_height / params_per_col * 0.65f;
-	float param_label_offset = active_box_height / params_per_col * 0.85f;
-
-	int module_hp = 12;
-	
-	racktarget::Panel *panel;
-	bool dirty = false;
+	// int numParams;
+	// int numInputs;
+	// int numOutputs;
+	//
+	// std::vector<std::string> inputLabels;
+	// std::vector<std::string> outputLabels;
+	// std::vector<std::string> paramLabels;
+	//
+	// // Each column of ports has a certain number of "cells" that contain a port and label. 
+	// int ports_per_col = 6;
+	//
+	// // Each column of params has a certain number of "cells" that contain a port, a label, and a knob.
+	// int params_per_col = 4;
+	// 
+	// // Box off the actual section of "cells" with a margin
+	// int l_margin = RACK_GRID_WIDTH;
+	// int r_margin = RACK_GRID_WIDTH;
+	// int bot_margin = 2 * RACK_GRID_WIDTH;
+	// // The title and top margin together make up the top band of margin
+	// int top_margin = RACK_GRID_WIDTH;
+	// int h_title = 3 * RACK_GRID_WIDTH;
+	// // The height of the actual part that will contain ports and knobs
+	// int active_box_height = RACK_GRID_HEIGHT - bot_margin - h_title - top_margin;
+	//
+	// // A column will take up 3HP
+	// int w_col = 3 * RACK_GRID_WIDTH;
+	//
+	// // Offset from the top of a cell to the knobs, ports, and labels
+	// float port_center_offset = active_box_height / ports_per_col * 0.25f;
+	// float label_port_offset = active_box_height / ports_per_col * 0.55f;
+	// float param_knob_center_offset = active_box_height / params_per_col * 0.25f;
+	// float param_port_center_offset = active_box_height / params_per_col * 0.65f;
+	// float param_label_offset = active_box_height / params_per_col * 0.85f;
+	//
+	// int module_hp = 12;
+	// 
+	// racktarget::Panel *panel;
+	// bool dirty = false;
 
 
 	EMU_VCOWidget(EMU_VCO* module) {
@@ -204,24 +204,35 @@ struct EMU_VCOWidget : ModuleWidget {
 			addParam(createParamCentered<EmuKnob>(POS::TRIANGLE_MIX_PARAM, module, 2));
 			addParam(createParamCentered<EmuKnob>(POS::FINE_PARAM, module, 3));
 			addParam(createParamCentered<EmuKnob>(POS::SAWTOOTH_MIX_PARAM, module, 4));
-			addParam(createParamCentered<EmuKnob>(POS::PULSE_MIX_PARAM, module, 7));
-			addParam(createParamCentered<EmuKnob>(POS::PWIDTH_PARAM, module, 11));
-			addParam(createParamCentered<EmuKnob>(POS::EXP_ATT_PARAM, module, 8));
-			addParam(createParamCentered<EmuKnob>(POS::LIN_ATT_PARAM, module, 6));
-			addParam(createParamCentered<EmuKnob>(POS::PWIDTH_ATT_PARAM, module, 9));
+			addParam(createParamCentered<EmuKnob>(POS::PWIDTH_ATT_PARAM, module, 7));
+			addParam(createParamCentered<EmuKnob>(POS::PWIDTH_PARAM, module, 8));
+			addParam(createParamCentered<EmuKnob>(POS::LIN_ATT_PARAM, module, 11));
+			addParam(createParamCentered<EmuKnob>(POS::EXP_ATT_PARAM, module, 12));
 
-			// switches
-			addParam(createParamCentered<EmuSwitch>(POS::KYBD_PARAM, module, 9));
-			addParam(createParamCentered<EmuSwitch>(POS::SYNC_PARAM, module, 10));
-			addParam(createParamCentered<EmuSwitch>(POS::HILOW_PARAM, module, 11));
+			addParam(createParamCentered<EmuKnob>(POS::PULSE_MIX_PARAM, module, 9));
+
+
+
+			// 9, 11, 12,
+			//
+			// 14 - OCT input
+			addInput(createInputCentered<PJ301MPort>(POS::OCT_INPUT, module, 14));
+			// 10 - pulse width input
+			addInput(createInputCentered<PJ301MPort>(POS::PWIDTH_IN_INPUT, module, 10));
+			// 17 - SYNC switch
+			addParam(createParamCentered<EmuSwitch>(POS::SYNC_PARAM, module, 17));
+			// 18 - KYBD
+			addParam(createParamCentered<EmuSwitch>(POS::KYBD_PARAM, module, 18));
+			// 13 - GATE
+			addInput(createInputCentered<PJ301MPort>(POS::GATE_INPUT, module, 13));
+			// 15 - SYNC input
+			addInput(createInputCentered<PJ301MPort>(POS::SYNCIN_INPUT, module, 15));
+			// 16 - HILO switch
+			addParam(createParamCentered<EmuSwitch>(POS::HILOW_PARAM, module, 16));
 
 			// inputs
-			addInput(createInputCentered<PJ301MPort>(POS::EXP_INPUT, module, 0));
-			addInput(createInputCentered<PJ301MPort>(POS::LIN_INPUT, module, 1));
-			addInput(createInputCentered<PJ301MPort>(POS::PWIDTH_IN_INPUT, module, 2));
-			addInput(createInputCentered<PJ301MPort>(POS::OCT_INPUT, module, 3));
-			addInput(createInputCentered<PJ301MPort>(POS::GATE_INPUT, module, 4));
-			addInput(createInputCentered<PJ301MPort>(POS::SYNCIN_INPUT, module, 5));
+			addInput(createInputCentered<PJ301MPort>(POS::EXP_INPUT, module, 6));
+			addInput(createInputCentered<PJ301MPort>(POS::LIN_INPUT, module, 5));
 
 			// outputs
 			addOutput(createOutputCentered<PJ301MPort>(POS::SINE_OUTPUT, module, 0));
